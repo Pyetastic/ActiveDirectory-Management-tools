@@ -1,0 +1,150 @@
+#$ErrorActionPreference = 'SilentlyContinue'
+
+#$sufix = "-sm"
+#text.text
+#New-ADUser -SamAccountName text.text + $sufix -GivenName text.text -Surname $sufix -DisplayName text.text -Path 'OU=SD,OU=Test User Accounts,OU=Test Accounts,OU=User Accounts,DC=ni,DC=ad,DC=newsint' 
+$SecPaswd= #Enter create your own generation system .
+Add-Type -AssemblyName System.Windows.Forms
+
+$SharedMailbox = New-Object system.Windows.Forms.Form
+$SharedMailbox.Text = "Shared Mailbox Creation Tool"
+$SharedMailbox.TopMost = $true
+$SharedMailbox.Width = 500
+$SharedMailbox.Height = 120
+
+$SAMnametxt = New-Object system.windows.Forms.TextBox
+$SAMnametxt.Width = 110
+$SAMnametxt.Height = 20
+$SAMnametxt.location = new-object system.drawing.point(135,17)
+$SAMnametxt.Font = "Microsoft Sans Serif,10"
+$SharedMailbox.controls.Add($SAMnametxt)
+
+$PCAccountnamelbl = New-Object system.windows.Forms.Label
+$PCAccountnamelbl.Text = "PC Account Name"
+$PCAccountnamelbl.AutoSize = $true
+$PCAccountnamelbl.Width = 25
+$PCAccountnamelbl.Height = 10
+$PCAccountnamelbl.location = new-object system.drawing.point(14,18)
+$PCAccountnamelbl.Font = "Microsoft Sans Serif,10"
+$SharedMailbox.controls.Add($PCAccountnamelbl)
+
+$fsntxt = New-Object system.windows.Forms.TextBox
+$fsntxt.Width = 110
+$fsntxt.Height = 20
+$fsntxt.location = new-object system.drawing.point(135,40)
+$fsntxt.Font = "Microsoft Sans Serif,10"
+$SharedMailbox.controls.Add($fsntxt)
+
+$fsnlbl = New-Object system.windows.Forms.Label
+$fsnlbl.Text = "First Name"
+$fsnlbl.AutoSize = $true
+$fsnlbl.Width = 25
+$fsnlbl.Height = 10
+$fsnlbl.location = new-object system.drawing.point(14,40)
+$fsnlbl.Font = "Microsoft Sans Serif,10"
+$SharedMailbox.controls.Add($fsnlbl)
+
+$sntxt = New-Object system.windows.Forms.TextBox
+$sntxt.Width = 110
+$sntxt.Height = 20
+$sntxt.location = new-object system.drawing.point(135,64)
+$sntxt.Font = "Microsoft Sans Serif,10"
+$SharedMailbox.controls.Add($sntxt)
+
+$snlbl = New-Object system.windows.Forms.Label
+$snlbl.Text = "Last Name"
+$snlbl.AutoSize = $true
+$snlbl.Width = 25
+$snlbl.Height = 10
+$snlbl.location = new-object system.drawing.point(14,64)
+$snlbl.Font = "Microsoft Sans Serif,10"
+$SharedMailbox.controls.Add($snlbl)
+
+
+#$SAMnametxt = New-Object system.windows.Forms.TextBox
+#$SAMnametxt.Width = 110
+#$SAMnametxt.Height = 20
+#$SAMnametxt.location = new-object system.drawing.point(135,17)
+#$SAMnametxt.Font = "Microsoft Sans Serif,10"
+#$SharedMailbox.controls.Add($SAMnametxt)
+
+$Createbtn = New-Object system.windows.Forms.Button
+$Createbtn.Text = "Create"
+$Createbtn.Width = 60
+$Createbtn.Height = 30
+$Createbtn.Add_Click({
+
+$Email = $SAMnametxt.text
+#$sufix = "-sm"
+$UPN = $Email + "@ni.ad.newsint"
+
+#New-ADUser -name $Email -SamAccountName $Email -GivenName $Email -Surname $sufix -UserPrincipalName $UPN -DisplayName $Email -company "News UK" -department "Shared Mailbox"  -Path 'OU=SD,OU=Test User Accounts,OU=Test Accounts,OU=User Accounts,DC=ni,DC=ad,DC=newsint' 
+#Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $Email
+#Get-ADUser -Identity  $Email| Enable-ADAccount;
+
+ 
+If ($Typebox.SelectedItem -eq "Emergency starter")
+    {
+    $Displayname = $fsntxt.Text + $sntxt.Text
+    [datetime] $tstexp = (Get-Date).AddDays(+10).ToString('MM-dd-yyyy')
+    $setup = (Get-Date).ToString('MM-dd-yyyy')
+    New-ADUser -name $Displayname -SamAccountName $Email -UserPrincipalName $UPN -DisplayName $Displayname -givenname $fsntxt.Text -Surname $sntxt.Text -description ("Emergency Set Up $setup") -company "News UK" -department "Emergency starter"  -Path 'OU=SD,OU=Test User Accounts,OU=Test Accounts,OU=User Accounts,DC=ni,DC=ad,DC=newsint' 
+    Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $Email
+    Get-ADUser -Identity  $Email| Enable-ADAccount;
+    Set-ADAccountExpiration -Identity $Email -DateTime $tstexp
+   # Set-ADUser -Identity $Email -department "Emergency starter" -description ("Emergency Set Up $setup") -Surname $sntxt.Text -givenname $fsntxt.Text -name $Displayname -DisplayName $Displayname
+
+    }
+If ($Typebox.SelectedItem -eq "Contributer")
+    {
+    $Displayname = $fsntxt.Text + $sntxt.Text
+    [datetime] $tstexp = (Get-Date).AddDays(+365).ToString('MM-dd-yyyy')
+    $setup = (Get-Date).ToString('MM-dd-yyyy')
+    New-ADUser -name $Displayname -SamAccountName $Email -UserPrincipalName $UPN -DisplayName $Displayname -givenname $fsntxt.Text -Surname $sntxt.Text -company "News UK" -department "Contributor/Retainer"  -Path 'OU=SD,OU=Test User Accounts,OU=Test Accounts,OU=User Accounts,DC=ni,DC=ad,DC=newsint' 
+    Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $Email
+    Get-ADUser -Identity  $Email| Enable-ADAccount;
+    Set-ADAccountExpiration -Identity $Email -DateTime $tstexp
+
+  
+
+    }
+If ($Typebox.SelectedItem -eq "Shared Mailbox")
+    {
+    [datetime] $tstexp = (Get-Date).AddDays(+365).ToString('MM-dd-yyyy')
+    $setup = (Get-Date).ToString('MM-dd-yyyy')
+
+    $Email = $SAMnametxt.text
+    $sufix = $Email + "-sm"
+    $UPN = $sufix + "@ni.ad.newsint"
+    
+    New-ADUser -name $Email -SamAccountName $sufix -GivenName $Email -Surname $sufix -UserPrincipalName $UPN -DisplayName $Email -company "News UK" -department "Shared Mailbox"  -Path 'OU=SD,OU=Test User Accounts,OU=Test Accounts,OU=User Accounts,DC=ni,DC=ad,DC=newsint' 
+    Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $sufix
+    Get-ADUser -Identity  $sufix| Enable-ADAccount;
+    Set-ADUser -Identity $sufix -department "Shared Mailbox" -Surname "-sm"
+    Set-ADAccountExpiration -Identity $sufix -DateTime $tstexp
+
+    }
+#add here code triggered by the event
+[System.Windows.MessageBox]::Show($Email + ' Has been created ' )
+echo $?
+
+})
+$Createbtn.location = new-object system.drawing.point(255,13)
+$Createbtn.Font = "Microsoft Sans Serif,10"
+$SharedMailbox.controls.Add($Createbtn)
+
+
+$Typebox = New-Object system.windows.Forms.ComboBox
+$Typebox.Text = "Account Type"
+$Typebox.Width = 134
+$Typebox.Height = 20
+$Typebox.location = new-object system.drawing.point(320,17)
+$Typebox.Font = "Microsoft Sans Serif,10"
+$Typebox.items.AddRange(@("Shared Mailbox" ,"Contributer", "Emergency starter"))
+$SharedMailbox.controls.Add($Typebox)
+
+[void]$SharedMailbox.ShowDialog()
+$SharedMailbox.Dispose()
+
+#[datetime] $tstexp = (Get-Date).AddDays(+10).ToString('MM-dd-yyyy'
+#Set-ADAccountExpiration -Identity TTesterson2 -DateTime $tstexp

@@ -1,0 +1,990 @@
+#Grid #1 19,x #2 100,x #3 190,x # 275,X 
+#$ErrorActionPreference = 'SilentlyContinue'
+$ErrorActionPreference = 'SilentlyContinue'
+
+#Gets the windows frame moduel
+Add-Type -AssemblyName System.Windows.Forms
+$SecPaswd= #insert your own random password rules here. 
+
+#Creates the windows form
+$Form = New-Object system.Windows.Forms.Form
+$Form.Text = "RBA Computer account creation"
+$Form.TopMost = $true
+$Form.Width = 380
+$Form.Height = 620
+
+#Creates the lable for the username
+$lbllable = New-Object system.windows.Forms.Label
+$lbllable.Text = "Username:"
+$lbllable.AutoSize = $true
+$lbllable.Width = 25
+$lbllable.Height = 10
+$lbllable.location = new-object system.drawing.point(19,20)
+$lbllable.Font = "Microsoft Sans Serif,10"
+$Form.controls.Add($lbllable)
+
+#Creates a textbox on the windows form cls
+$txtusername = New-Object system.windows.Forms.TextBox
+$txtusername.Width = 100
+$txtusername.Height = 20
+$txtusername.location = new-object system.drawing.point(100,15)
+$txtusername.Font = "Microsoft Sans Serif,10"
+$Form.controls.Add($txtusername)
+
+#Veriables for the writer button
+$txtWriter = New-Object system.windows.Forms.Button
+$txtWriter.Text = "Writer"
+$txtWriter.Width = 76
+$txtWriter.Height = 37
+$txtWriter.Add_Click({
+#Copies ad groups 
+get-aduser -identity rbatimeswriter -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+
+#Veriables for the desk button
+$txtDesk = New-Object system.windows.Forms.Button
+$txtDesk.Text = "Desk"
+$txtDesk.Width = 76
+$txtDesk.Height = 37
+$txtDesk.Add_Click({
+#Copies ad groups 
+get-aduser -identity _RBA_Times -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+
+#Veriables for the deskadmin button
+$txtDeskadmin = New-Object system.windows.Forms.Button
+$txtDeskadmin.Text = "Desk Admin"
+$txtDeskadmin.Width = 76
+$txtDeskadmin.Height = 37
+$txtDeskadmin.Add_Click({
+#Copies ad groups 
+get-aduser -identity _RBA_Times3 -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+
+#Veriables for the Digital button
+$Digital = New-Object system.windows.Forms.Button
+$Digital.Text = "Digital"
+$Digital.Width = 76
+$Digital.Height = 37
+$Digital.Add_Click({
+#Copies ad groups 
+get-aduser -identity _RBA_Times4 -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+
+#Veriables for the BackBench button
+$BackBench = New-Object system.windows.Forms.Button
+$BackBench.Text = "BackBench"
+$BackBench.Width = 76
+$BackBench.Height = 37
+$BackBench.Add_Click({
+#Copies ad groups 
+get-aduser -identity _RBA_Times5 -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;})
+
+#Veriables for the Design button
+$Design = New-Object system.windows.Forms.Button
+$Design.Text = "Design"
+$Design.Width = 76
+$Design.Height = 37
+$Design.Add_Click({
+#Copies ad groups 
+get-aduser -identity _RBA_Times7 -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+
+#Veriables for the Graphics button
+$Graphics = New-Object system.windows.Forms.Button
+$Graphics.Text = "Graphics"
+$Graphics.Width = 76
+$Graphics.Height = 37
+$Graphics.Add_Click({
+#Copies ad groups 
+get-aduser -identity _RBA_Times8 -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+
+#Veriables for the Pictures button
+$Pictures = New-Object system.windows.Forms.Button
+$Pictures.Text = "Pictures"
+$Pictures.Width = 76
+$Pictures.Height = 37
+$Pictures.Add_Click({
+#Copies ad groups 
+get-aduser -identity _RBA_Times11  -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+
+#Veriables for the Multimedia button
+$Multimedia = New-Object system.windows.Forms.Button
+$Multimedia.Text = "Multimedia"
+$Multimedia.Width = 76
+$Multimedia.Height = 37
+$Multimedia.Add_Click({
+#Copies ad groups 
+get-aduser -identity _RBA_Times6  -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+
+#Veriables for the Multimedia button
+$DigitalEditor = New-Object system.windows.Forms.Button
+$DigitalEditor.Text = "DigitalEditor"
+$DigitalEditor.Width = 76
+$DigitalEditor.Height = 37
+$DigitalEditor.Add_Click({
+#Copies ad groups 
+get-aduser -identity _RBA_Times9  -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+
+#Creates the Multimedia button 
+$DigitalEditor.location = new-object system.drawing.point(100,225)
+$DigitalEditor.Font = "Microsoft Sans Serif,8"
+$DigitalEditor.BackColor = "#9fc662"
+$Form.controls.Add($DigitalEditor)
+
+#Creates the Multimedia button 
+$Multimedia.location = new-object system.drawing.point(100,180)
+$Multimedia.Font = "Microsoft Sans Serif,8"
+$Multimedia.BackColor = "#9fc662"
+$Form.controls.Add($Multimedia)
+
+#Creates the Pictures button 
+$Pictures.location = new-object system.drawing.point(100,135)
+$Pictures.Font = "Microsoft Sans Serif,8"
+$Pictures.BackColor = "#9fc662"
+$Form.controls.Add($Pictures)
+
+#Creates the Graphics button 
+$Graphics.location = new-object system.drawing.point(100,90)
+$Graphics.Font = "Microsoft Sans Serif,8"
+$Graphics.BackColor = "#9fc662"
+$Form.controls.Add($Graphics)
+
+#Creates the Design button 
+$Design.location = new-object system.drawing.point(100,45)
+$Design.Font = "Microsoft Sans Serif,8"
+$Design.BackColor = "#9fc662"
+$Form.controls.Add($Design)
+
+#Creates the BackBench button 
+$BackBench.location = new-object system.drawing.point(19,225)
+$BackBench.Font = "Microsoft Sans Serif,8"
+$BackBench.BackColor = "#9fc662"
+$Form.controls.Add($BackBench)
+
+#Creates the Digital button
+$Digital.location = new-object system.drawing.point(19,180)
+$Digital.Font = "Microsoft Sans Serif,8"
+$Digital.BackColor = "#9fc662"
+$Form.controls.Add($Digital)
+
+#Creates the deskadmin button
+$txtDeskadmin.location = new-object system.drawing.point(19,135)
+$txtDeskadmin.Font = "Microsoft Sans Serif,8"
+$txtDeskadmin.BackColor = "#9fc662"
+$Form.controls.Add($txtDeskadmin)
+
+#Creates the desk button
+$txtDesk.location = new-object system.drawing.point(19,90)
+$txtDesk.Font = "Microsoft Sans Serif,8"
+$txtDesk.BackColor = "#9fc662"
+$Form.controls.Add($txtDesk)
+
+#Creates the writer button button
+$txtWriter.location = new-object system.drawing.point(19,45)
+$txtWriter.Font = "Microsoft Sans Serif,8"
+$txtWriter.BackColor = "#9fc662"
+$Form.controls.Add($txtWriter)
+
+########################################################################################
+########################################################################################
+#####################################Sunday Times#######################################
+
+
+##### Left side ST ######
+
+
+$STWriter = New-Object system.windows.Forms.Button
+$STWriter.Text = "STWriter"
+$STWriter.Width = 76
+$STWriter.Height = 37
+$STWriter.Add_Click({
+#Copies ad groups 
+get-aduser -identity "_RBA_Sunday Times1"  -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$STWriter.location = new-object system.drawing.point(190,45)
+$STWriter.Font = "Microsoft Sans Serif,7"
+$STWriter.BackColor = "#C6C362"
+$Form.controls.Add($STWriter)
+
+$STSub = New-Object system.windows.Forms.Button
+$STSub.Text = "STSub"
+$STSub.Width = 76
+$STSub.Height = 37
+$STSub.Add_Click({
+#Copies ad groups 
+get-aduser -identity "_RBA_Sunday Times4" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$STSub.location = new-object system.drawing.point(190,90)
+$STSub.Font = "Microsoft Sans Serif,7"
+$STSub.BackColor = "#C6C362"
+$Form.controls.Add($STSub)
+
+$STPictures = New-Object system.windows.Forms.Button
+$STPictures.Text = "STPictures"
+$STPictures.Width = 76
+$STPictures.Height = 37
+$STPictures.Add_Click({
+#Copies ad groups 
+get-aduser -identity "_RBA_Sunday Times8" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$STPictures.location = new-object system.drawing.point(190,135)
+$STPictures.Font = "Microsoft Sans Serif,7"
+$STPictures.BackColor = "#C6C362"
+$Form.controls.Add($STPictures)
+
+$STPictures = New-Object system.windows.Forms.Button
+$STPictures.Text = "STPictures"
+$STPictures.Width = 76
+$STPictures.Height = 37
+$STPictures.Add_Click({
+#Copies ad groups 
+get-aduser -identity "_RBA_Sunday Times8" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$STPictures.location = new-object system.drawing.point(190,135)
+$STPictures.Font = "Microsoft Sans Serif,7"
+$STPictures.BackColor = "#C6C362"
+$Form.controls.Add($STPictures)
+
+$STMultimedia = New-Object system.windows.Forms.Button
+$STMultimedia.Text = "STMultimedia"
+$STMultimedia.Width = 76
+$STMultimedia.Height = 37
+$STMultimedia.Add_Click({
+#Copies ad groups 
+get-aduser -identity "_RBA_Sunday Times9" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$STMultimedia.location = new-object system.drawing.point(190,180)
+$STMultimedia.Font = "Microsoft Sans Serif,7"
+$STMultimedia.BackColor = "#C6C362"
+$Form.controls.Add($STMultimedia)
+
+$STGraphics = New-Object system.windows.Forms.Button
+$STGraphics.Text = "STGraphics"
+$STGraphics.Width = 76
+$STGraphics.Height = 37
+$STGraphics.Add_Click({
+#Copies ad groups 
+get-aduser -identity "_RBA_Sunday Times7" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$STGraphics.location = new-object system.drawing.point(190,225)
+$STGraphics.Font = "Microsoft Sans Serif,7"
+$STGraphics.BackColor = "#C6C362"
+$Form.controls.Add($STGraphics)
+
+#####Right side of ST ########
+
+$STDigitalEditor = New-Object system.windows.Forms.Button
+$STDigitalEditor.Text = "STDigitalEditor"
+$STDigitalEditor.Width = 76
+$STDigitalEditor.Height = 37
+$STDigitalEditor.Add_Click({
+#Copies ad groups 
+get-aduser -identity "_RBA_Sunday Times10" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$STDigitalEditor.location = new-object system.drawing.point(275,45)
+$STDigitalEditor.Font = "Microsoft Sans Serif,7"
+$STDigitalEditor.BackColor = "#C6C362"
+$Form.controls.Add($STDigitalEditor)
+
+$STDeskAdmin = New-Object system.windows.Forms.Button
+$STDeskAdmin.Text = "STDeskAdmin"
+$STDeskAdmin.Width = 76
+$STDeskAdmin.Height = 37
+$STDeskAdmin.Add_Click({
+#Copies ad groups 
+get-aduser -identity "_RBA_Sunday Times3" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$STDeskAdmin.location = new-object system.drawing.point(275,90)
+$STDeskAdmin.Font = "Microsoft Sans Serif,7"
+$STDeskAdmin.BackColor = "#C6C362"
+$Form.controls.Add($STDeskAdmin)
+
+$STDesk = New-Object system.windows.Forms.Button
+$STDesk.Text = "STDesk"
+$STDesk.Width = 76
+$STDesk.Height = 37
+$STDeskAdmin.Add_Click({
+#Copies ad groups 
+get-aduser -identity "_RBA_Sunday Times2" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$STDesk.location = new-object system.drawing.point(275,135)
+$STDesk.Font = "Microsoft Sans Serif,7"
+$STDesk.BackColor = "#C6C362"
+$Form.controls.Add($STDesk)
+
+$STDesign = New-Object system.windows.Forms.Button
+$STDesign.Text = "STDesk"
+$STDesign.Width = 76
+$STDesign.Height = 37
+$STDesign.Add_Click({
+#Copies ad groups 
+get-aduser -identity "_RBA_Sunday Times6" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$STDesign.location = new-object system.drawing.point(275,180)
+$STDesign.Font = "Microsoft Sans Serif,7"
+$STDesign.BackColor = "#C6C362"
+$Form.controls.Add($STDesign)
+
+$STChiefSub = New-Object system.windows.Forms.Button
+$STChiefSub.Text = "STChiefSub"
+$STChiefSub.Width = 76
+$STChiefSub.Height = 37
+$STChiefSub.Add_Click({
+#Copies ad groups 
+get-aduser -identity "_RBA_Sunday Times5" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$STChiefSub.location = new-object system.drawing.point(275,225)
+$STChiefSub.Font = "Microsoft Sans Serif,7"
+$STChiefSub.BackColor = "#C6C362"
+$Form.controls.Add($STChiefSub)
+
+########################################################################################
+########################################################################################
+#####################################Miscellaneous######################################
+
+$technology = New-Object system.windows.Forms.Button
+$technology.Text = "Technology"
+$technology.Width = 76
+$technology.Height = 37
+$technology.Add_Click({
+#Copies ad groups 
+get-aduser -identity technologyTemplate -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$technology.location = new-object system.drawing.point(19,275)
+$technology.Font = "Microsoft Sans Serif,8"
+$technology.BackColor = "#6C62C6"
+$Form.controls.Add($technology)
+
+$finance = New-Object system.windows.Forms.Button
+$finance.Text = "Finance"
+$finance.Width = 76
+$finance.Height = 37
+$finance.Add_Click({
+#Copies ad groups 
+get-aduser -identity __templatefinance -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$finance.location = new-object system.drawing.point(100,275)
+$finance.Font = "Microsoft Sans Serif,8"
+$finance.BackColor = "#6C62C6"
+$Form.controls.Add($finance)
+
+$HR = New-Object system.windows.Forms.Button
+$HR.Text = "HR"
+$HR.Width = 76
+$HR.Height = 37
+$HR.Add_Click({
+#Copies ad groups 
+get-aduser -identity __template -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$HR.location = new-object system.drawing.point(190,275)
+$HR.Font = "Microsoft Sans Serif,8"
+$HR.BackColor = "#6C62C6"
+$Form.controls.Add($HR)
+
+$legal = New-Object system.windows.Forms.Button
+$legal.Text = "Legal"
+$legal.Width = 76
+$legal.Height = 37
+$legal.Add_Click({
+#Copies ad groups 
+get-aduser -identity __templatengnlegal -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$legal.location = new-object system.drawing.point(275,275)
+$legal.Font = "Microsoft Sans Serif,8"
+$legal.BackColor = "#6C62C6"
+$Form.controls.Add($legal)
+
+############################################################################################Soon to be sun######################################################################################################
+############################################################################################ROW 1 ############################################################################################################
+
+$Sun1 = New-Object system.windows.Forms.Button
+$Sun1.Text = "Production Editor"
+$Sun1.Width = 76
+$Sun1.Height = 37
+$Sun1.Add_Click({
+#Copies ad groups 
+get-aduser -identity "SRBAPPE1" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$Sun1.location = new-object system.drawing.point(275,320)
+$Sun1.Font = "Microsoft Sans Serif,8"
+$Sun1.BackColor = "#f44242"
+$Form.controls.Add($Sun1)
+
+$Sun2 = New-Object system.windows.Forms.Button
+$Sun2.Text = "Sub Editor"
+$Sun2.Width = 76
+$Sun2.Height = 37
+$Sun2.Add_Click({
+#Copies ad groups 
+get-aduser -identity "SRBAPSE2" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$Sun2.location = new-object system.drawing.point(190,320)
+$Sun2.Font = "Microsoft Sans Serif,8"
+$Sun2.BackColor = "#f44242"
+$Form.controls.Add($Sun2)
+
+$Sun3 = New-Object system.windows.Forms.Button
+$Sun3.Text = "Picture Desk"
+$Sun3.Width = 76
+$Sun3.Height = 37
+$Sun3.Add_Click({
+#Copies ad groups 
+get-aduser -identity "SRBAPPD3" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$Sun3.location = new-object system.drawing.point(100,320)
+$Sun3.Font = "Microsoft Sans Serif,8"
+$Sun3.BackColor = "#f44242"
+$Form.controls.Add($Sun3)
+
+$Sun4 = New-Object system.windows.Forms.Button
+$Sun4.Text = "Design"
+$Sun4.Width = 76
+$Sun4.Height = 37
+$Sun4.Add_Click({
+#Copies ad groups 
+get-aduser -identity "SRBAPND5" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$Sun4.location = new-object system.drawing.point(19,320)
+$Sun4.Font = "Microsoft Sans Serif,8"
+$Sun4.BackColor = "#f44242"
+$Form.controls.Add($Sun4)
+
+
+##################################SUN row 2 ######################################
+
+$Sun5 = New-Object system.windows.Forms.Button
+$Sun5.Text = "News Desk"
+$Sun5.Width = 76
+$Sun5.Height = 37
+$Sun5.Add_Click({
+#Copies ad groups 
+get-aduser -identity "SRBAND5" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$Sun5.location = new-object system.drawing.point(275,365)
+$Sun5.Font = "Microsoft Sans Serif,8"
+$Sun5.BackColor = "#f44242"
+$Form.controls.Add($Sun5)
+
+$Sun6 = New-Object system.windows.Forms.Button
+$Sun6.Text = "Writer/PA"
+$Sun6.Width = 76
+$Sun6.Height = 37
+$Sun6.Add_Click({
+#Copies ad groups 
+get-aduser -identity "SRBARPWAP6" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$Sun6.location = new-object system.drawing.point(190,365)
+$Sun6.Font = "Microsoft Sans Serif,8"
+$Sun6.BackColor = "#f44242"
+$Form.controls.Add($Sun6)
+
+$Scotsun = New-Object system.windows.Forms.Button
+$Scotsun.Text = "Parliament"
+$Scotsun.Width = 76
+$Scotsun.Height = 37
+$Scotsun.Add_Click({
+#Copies ad groups 
+get-aduser -identity "SRBAPSP7" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$Scotsun.location = new-object system.drawing.point(100,365)
+$Scotsun.Font = "Microsoft Sans Serif,8"
+$Scotsun.BackColor = "#f44242"
+$Form.controls.Add($Scotsun)
+
+$Sunsub = New-Object system.windows.Forms.Button
+$Sunsub.Text = "Video Desk"
+$Sunsub.Width = 76
+$Sunsub.Height = 37
+$Sunsub.Add_Click({
+#Copies ad groups 
+get-aduser -identity "SRBADVD1" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$Sunsub.location = new-object system.drawing.point(19,365)
+$Sunsub.Font = "Microsoft Sans Serif,8"
+$Sunsub.BackColor = "#f49242"
+$Form.controls.Add($Sunsub)
+############################################# SUN ROW 3 ####################################################################
+$milla = New-Object system.windows.Forms.Button
+$milla.Text = "Picture Desk"
+$milla.Width = 76
+$milla.Height = 37
+$milla.Add_Click({
+#Copies ad groups 
+get-aduser -identity "SRBADPD2" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$milla.location = new-object system.drawing.point(19,410)
+$milla.Font = "Microsoft Sans Serif,8"
+$milla.BackColor = "#f49242"
+$Form.controls.Add($milla)
+
+
+$Dwriter = New-Object system.windows.Forms.Button
+$Dwriter.Text = "Online Writer"
+$Dwriter.Width = 76
+$Dwriter.Height = 37
+$Dwriter.Add_Click({
+#Copies ad groups 
+get-aduser -identity "SRBADOW3" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$Dwriter.location = new-object system.drawing.point(100,410)
+$Dwriter.Font = "Microsoft Sans Serif,8"
+$Dwriter.BackColor = "#f49242"
+$Form.controls.Add($Dwriter)
+
+$DOE = New-Object system.windows.Forms.Button
+$DOE.Text = "Online Editor"
+$DOE.Width = 76
+$DOE.Height = 37
+$DOE.Add_Click({
+#Copies ad groups 
+get-aduser -identity "SRBADOE4" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$DOE.location = new-object system.drawing.point(190,410)
+$DOE.Font = "Microsoft Sans Serif,8"
+$DOE.BackColor = "#f49242"
+$Form.controls.Add($DOE)
+
+$DOA = New-Object system.windows.Forms.Button
+$DOA.Text = "Online Editor"
+$DOA.Width = 76
+$DOA.Height = 37
+$DOA.Add_Click({
+#Copies ad groups 
+get-aduser -identity "SRBADOE4" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$DOA.location = new-object system.drawing.point(275,410)
+$DOA.Font = "Microsoft Sans Serif,8"
+$DOA.BackColor = "#f49242"
+$Form.controls.Add($DOA)
+###########################################################SUN Row 4#############################################
+
+$DOG = New-Object system.windows.Forms.Button
+$DOG.Text = "Online Graphics "
+$DOG.Width = 76
+$DOG.Height = 37
+$DOG.Add_Click({
+#Copies ad groups 
+get-aduser -identity "SRBADOG6" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$DOG.location = new-object system.drawing.point(19,450)
+$DOG.Font = "Microsoft Sans Serif,8"
+$DOG.BackColor = "#f49242"
+$Form.controls.Add($DOG)
+
+$SS = New-Object system.windows.Forms.Button
+$SS.Text = "Scottland"
+$SS.Width = 76
+$SS.Height = 37
+$SS.Add_Click({
+#Copies ad groups 
+get-aduser -identity "SRBAS00" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+#Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+#$UPN = get-aduser -Identity $txtusername.Text;
+#$UPN = $UPN.SamAccountName
+#$UPN = $UPN + "@ni.ad.newsint"
+#Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+#Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$SS.location = new-object system.drawing.point(100,450)
+$SS.Font = "Microsoft Sans Serif,8"
+$SS.BackColor = "#dd08a8"
+$Form.controls.Add($SS)
+
+
+#### Generics #####
+
+
+
+
+$wirelessperm = New-Object system.windows.Forms.Button
+$wirelessperm.Text = "Wireless Perm"
+$wirelessperm.Width = 76
+$wirelessperm.Height = 37
+$wirelessperm.Add_Click({
+#Copies ad groups 
+get-aduser -identity "__TemplateWirelessGr" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$wirelessperm.location = new-object system.drawing.point(275,500)
+$wirelessperm.Font = "Microsoft Sans Serif,8"
+$wirelessperm.BackColor = "#42bcf4"
+$Form.controls.Add($wirelessperm)
+
+$Advertising = New-Object system.windows.Forms.Button
+$Advertising.Text = "Advertising"
+$Advertising.Width = 76
+$Advertising.Height = 37
+$Advertising.Add_Click({
+#Copies ad groups 
+get-aduser -identity "__templateadent" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$Advertising.location = new-object system.drawing.point(100,500)
+$Advertising.Font = "Microsoft Sans Serif,8"
+$Advertising.BackColor = "#6C62C6"
+$Form.controls.Add($Advertising)
+
+
+$TLS = New-Object system.windows.Forms.Button
+$TLS.Text = "TLS"
+$TLS.Width = 76
+$TLS.Height = 37
+$TLS.Add_Click({
+#Copies ad groups 
+get-aduser -identity "__templatetls" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$TLS.location = new-object system.drawing.point(190,500)
+$TLS.Font = "Microsoft Sans Serif,8"
+$TLS.BackColor = "#6C62C6"
+$Form.controls.Add($TLS)
+
+$Cdirect = New-Object system.windows.Forms.Button
+$Cdirect.Text = "Cust Direct"
+$Cdirect.Width = 76
+$Cdirect.Height = 37
+$Cdirect.Add_Click({
+#Copies ad groups 
+get-aduser -identity "__CustDirectTemplate" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$Cdirect.location = new-object system.drawing.point(19,500)
+$Cdirect.Font = "Microsoft Sans Serif,8"
+$Cdirect.BackColor = "#6C62C6"
+$Form.controls.Add($Cdirect)
+
+
+##################################################################
+########################Print Sites###############################
+
+$Brox = New-Object system.windows.Forms.Button
+$Brox.Text = "Broxbourne"
+$Brox.Width = 76
+$Brox.Height = 37
+$Brox.Add_Click({
+#Copies ad groups 
+get-aduser -identity "__TemplateBrox" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$Brox.location = new-object system.drawing.point(19,540)
+$Brox.Font = "Microsoft Sans Serif,8"
+$Brox.BackColor = "#fab5fc"
+$Form.controls.Add($Brox)
+
+$knows = New-Object system.windows.Forms.Button
+$knows.Text = "Knowsley"
+$knows.Width = 76
+$knows.Height = 37
+$knows.Add_Click({
+#Copies ad groups 
+get-aduser -identity "__knoprod" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$knows.location = new-object system.drawing.point(100,540)
+$knows.Font = "Microsoft Sans Serif,8"
+$knows.BackColor = "#fab5fc"
+$Form.controls.Add($knows)
+
+$Euro = New-Object system.windows.Forms.Button
+$Euro.Text = "EuroCentral"
+$Euro.Width = 76
+$Euro.Height = 37
+$Euro.Add_Click({
+#Copies ad groups 
+get-aduser -identity "__Templatenewsprinte" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$Euro.location = new-object system.drawing.point(190,540)
+$Euro.Font = "Microsoft Sans Serif,8"
+$Euro.BackColor = "#fab5fc"
+$Form.controls.Add($Euro)
+
+$wirelesscas = New-Object system.windows.Forms.Button
+$wirelesscas.Text = "Wireless Casual"
+$wirelesscas.Width = 76
+$wirelesscas.Height = 37
+$wirelesscas.Add_Click({
+#Copies ad groups 
+get-aduser -identity "__TemplateWirelessCa" -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtusername.Text;
+Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $txtusername.Text;
+$UPN = get-aduser -Identity $txtusername.Text;
+$UPN = $UPN.SamAccountName
+$UPN = $UPN + "@ni.ad.newsint"
+Set-ADUser $txtusername.Text -UserPrincipalName $UPN
+Get-ADUser -Identity  $txtusername.Text| Enable-ADAccount;
+})
+$wirelesscas.location = new-object system.drawing.point(275,540)
+$wirelesscas.Font = "Microsoft Sans Serif,8"
+$wirelesscas.BackColor = "#42bcf4"
+$Form.controls.Add($wirelesscas)
+
+[void]$Form.ShowDialog()
+$Form.Dispose()

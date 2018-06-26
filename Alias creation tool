@@ -1,0 +1,129 @@
+$ErrorActionPreference = 'SilentlyContinue'
+
+Add-Type -AssemblyName System.Windows.Forms
+
+$Form = New-Object system.Windows.Forms.Form
+$Form.Text = "Alias Creation Tool"
+$Form.TopMost = $true
+$Form.Width = 488
+$Form.Height = 153
+
+$Aliasbox = New-Object system.windows.Forms.ComboBox
+$Aliasbox.Text = "Select Domain"
+$Aliasbox.Width = 134
+$Aliasbox.Height = 20
+$Aliasbox.location = new-object system.drawing.point(225,81)
+$Aliasbox.Font = "Microsoft Sans Serif,10"
+$Aliasbox.items.AddRange(@("@the-times.co.uk","@thetimes.co.uk","@times.co.uk","@the-sun.co.uk","@thesun.co.uk","@sun.co.uk", "@theSunday-times.co.uk","@theSundaytimes.co.uk","@news.co.uk"))
+$Form.controls.Add($Aliasbox)
+
+$displaynamelbl = New-Object system.windows.Forms.Label
+$displaynamelbl.Text = "insertnamehere"
+$displaynamelbl.AutoSize = $true
+$displaynamelbl.Width = 25
+$displaynamelbl.Height = 10
+$displaynamelbl.location = new-object system.drawing.point(266,28)
+$displaynamelbl.Font = "Microsoft Sans Serif,10"
+$Form.controls.Add($displaynamelbl)
+$displaynamelbl.Text = ""
+
+$Createbtn = New-Object system.windows.Forms.Button
+$Createbtn.Text = "Create"
+$Createbtn.Width = 60
+$Createbtn.Height = 30
+$Createbtn.location = new-object system.drawing.point(400,74)
+$Createbtn.Font = "Microsoft Sans Serif,10"
+$Createbtn.Add_Click({
+
+If ($Aliasbox.SelectedItem -eq "the-times.co.uk")
+{
+ set-aduser -Identity $ADnametext.Text -add @{Proxyaddresses="smtp:"+$AliasName.Text+"@the-times.co.uk"}
+ }
+If ($Aliasbox.SelectedItem -eq "@thetimes.co.uk")
+{
+ set-aduser -Identity $ADnametext.Text -add @{Proxyaddresses="smtp:"+$AliasName.Text+"@thetimes.co.uk"}
+ }
+If ($Aliasbox.SelectedItem -eq "@times.co.uk")
+{
+ set-aduser -Identity $ADnametext.Text -add @{Proxyaddresses="smtp:"+$AliasName.Text+"@times.co.uk"}
+ }
+ If ($Aliasbox.SelectedItem -eq "@the-sun.co.uk")
+{
+ set-aduser -Identity $ADnametext.Text -add @{Proxyaddresses="smtp:"+$AliasName.Text+"@the-sun.co.uk"}
+ }
+If ($Aliasbox.SelectedItem -eq "@thesun.co.uk")
+{ 
+ set-aduser -Identity $ADnametext.Text -add @{Proxyaddresses="smtp:"+$AliasName.Text+"@thesun.co.uk"}
+}
+ If ($Aliasbox.SelectedItem -eq "@sun.co.uk")
+{ 
+
+ set-aduser -Identity $ADnametext.Text -add @{Proxyaddresses="smtp:"+$AliasName.Text+"@sun.co.uk"}
+ }
+If ($Aliasbox.SelectedItem -eq "@theSunday-times.co.uk")
+{
+ set-aduser -Identity $ADnametext.Text -add @{Proxyaddresses="smtp:"+$AliasName.Text+"@theSunday-times.co.uk"}
+ }
+If ($Aliasbox.SelectedItem -eq "@thesundaytimes.co.uk")
+{
+ set-aduser -Identity $ADnametext.Text -add @{Proxyaddresses="smtp:"+$AliasName.Text+"@theSunday-times.co.uk"}
+}
+
+
+If ($Aliasbox.SelectedItem -eq "News")
+{
+ set-aduser -Identity $ADnametext.Text -add @{Proxyaddresses="smtp:"+$AliasName.Text+"@news.co.uk"}
+ }
+ [System.Windows.MessageBox]::Show($AliasName.text + $Aliasbox.SelectedItem + ' Has been added to ' + $ADnametext.Text)
+})
+$Form.controls.Add($Createbtn)
+
+$AliasName = New-Object system.windows.Forms.TextBox
+$AliasName.Width = 164
+$AliasName.Height = 20
+$AliasName.location = new-object system.drawing.point(28,80)
+$AliasName.Font = "Microsoft Sans Serif,10"
+$Form.controls.Add($AliasName)
+
+
+$Usernamelbl = New-Object system.windows.Forms.Label
+$Usernamelbl.Text = "Username:"
+$Usernamelbl.AutoSize = $true
+$Usernamelbl.Width = 25
+$Usernamelbl.Height = 10
+$Usernamelbl.location = new-object system.drawing.point(27,28)
+$Usernamelbl.Font = "Microsoft Sans Serif,10"
+$Form.controls.Add($Usernamelbl)
+
+$ADnametext = New-Object system.windows.Forms.TextBox
+$ADnametext.Width = 100
+$ADnametext.Height = 20
+$ADnametext.location = new-object system.drawing.point(110,26)
+$ADnametext.Font = "Microsoft Sans Serif,10"
+$Form.controls.Add($ADnametext)
+$ADnametext.add_keyup({
+ $displaynamelbl.Text = Get-ADUser -Identity $ADnametext.Text | Select -Property name
+
+})
+
+$Aliaslbl = New-Object system.windows.Forms.Label
+$Aliaslbl.Text = "Alias name"
+$Aliaslbl.AutoSize = $true
+$Aliaslbl.Width = 25
+$Aliaslbl.Height = 10
+$Aliaslbl.location = new-object system.drawing.point(78,58)
+$Aliaslbl.Font = "Microsoft Sans Serif,10"
+$Form.controls.Add($Aliaslbl)
+
+$Departmentlbl = New-Object system.windows.Forms.Label
+$Departmentlbl.Text = "Department"
+$Departmentlbl.AutoSize = $true
+$Departmentlbl.Width = 25
+$Departmentlbl.Height = 10
+$Departmentlbl.location = new-object system.drawing.point(257,58)
+$Departmentlbl.Font = "Microsoft Sans Serif,10"
+$Form.controls.Add($Departmentlbl)
+
+
+[void]$Form.ShowDialog()
+$Form.Dispose()

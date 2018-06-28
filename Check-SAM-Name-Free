@@ -1,0 +1,20 @@
+$Fname  = Import-Csv C:\temp\freenames.csv 
+$X=0
+
+ForEach($user in $Fname)
+{
+
+    $Name = $Fname[$X].MaybeUsernames
+    $Searcher = [ADSISearcher]"(sAMAccountName=$Name)"
+    $Results = $Searcher.FindOne()
+    If ($Results -eq $Null)
+    {
+    $Name + " Users does not exist in AD, 0"
+    }
+    Else
+    {
+    $Name + " User found in AD, 1"
+    }
+    $X ++
+
+}

@@ -1,0 +1,16 @@
+Import-Csv C:\temp\jpusers.csv 
+$ourobjectarray = Import-Csv C:\temp\jpusers.csv 
+$x=0
+
+
+ForEach($user in $ourobjectarray)
+{
+    Get-ADUser -identity $ourobjectarray[$x].Name  -Properties EmailAddress |
+    select Givenname,Surname,Samaccountname,EmailAddress |
+    #Add-Content C:\Temp\GroupsUsers.csv -Append
+   # Out-file C:\Temp\GroupsUsers.csv -nti 
+    Export-Csv C:\Temp\GroupsUsers.csv -Append 
+    Write-Output $ourobjectarray[$x].Name  $x
+    $x ++
+   
+} 

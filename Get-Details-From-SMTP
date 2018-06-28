@@ -13,4 +13,4 @@ ForEach($user in $ourobjectarray)
     Write-Output $ourobjectarray[$x].Name  $x
     $x ++
    
-} 
+}

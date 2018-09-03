@@ -1,0 +1,289 @@
+$ErrorActionPreference = 'SilentlyContinue'
+Add-Type -AssemblyName System.Windows.Forms
+[System.Windows.Forms.Application]::EnableVisualStyles()
+
+#region begin GUI{ 
+
+$FRMMain                         = New-Object system.Windows.Forms.Form
+$FRMMain.ClientSize              = '330,400'
+$FRMMain.text                    = "HCUK Account Creation Tool"
+$FRMMain.TopMost                 = $false
+
+$LblUsername                     = New-Object system.Windows.Forms.Label
+$LblUsername.text                = "Username"
+$LblUsername.AutoSize            = $true
+$LblUsername.width               = 25
+$LblUsername.height              = 10
+$LblUsername.location            = New-Object System.Drawing.Point(15,25)
+$LblUsername.Font                = 'Microsoft Sans Serif,10'
+
+$LblFN                           = New-Object system.Windows.Forms.Label
+$LblFN.text                      = "Firstname"
+$LblFN.AutoSize                  = $true
+$LblFN.width                     = 25
+$LblFN.height                    = 10
+$LblFN.location                  = New-Object System.Drawing.Point(15,50)
+$LblFN.Font                      = 'Microsoft Sans Serif,10'
+
+$LblSN                           = New-Object system.Windows.Forms.Label
+$LblSN.text                      = "Surname"
+$LblSN.AutoSize                  = $true
+$LblSN.width                     = 25
+$LblSN.height                    = 10
+$LblSN.location                  = New-Object System.Drawing.Point(15,75)
+$LblSN.Font                      = 'Microsoft Sans Serif,10'
+
+$txtun                           = New-Object system.Windows.Forms.TextBox
+$txtun.multiline                 = $false
+$txtun.width                     = 100
+$txtun.height                    = 20
+$txtun.location                  = New-Object System.Drawing.Point(85,25)
+$txtun.Font                      = 'Microsoft Sans Serif,10'
+
+$txtfn                           = New-Object system.Windows.Forms.TextBox
+$txtfn.multiline                 = $false
+$txtfn.width                     = 100
+$txtfn.height                    = 20
+$txtfn.location                  = New-Object System.Drawing.Point(85,50)
+$txtfn.Font                      = 'Microsoft Sans Serif,10'
+
+$txtsn                           = New-Object system.Windows.Forms.TextBox
+$txtsn.multiline                 = $false
+$txtsn.width                     = 100
+$txtsn.height                    = 20
+$txtsn.location                  = New-Object System.Drawing.Point(85,75)
+$txtsn.Font                      = 'Microsoft Sans Serif,10'
+
+$btnperm                         = New-Object system.Windows.Forms.Button
+$btnperm.text                    = "Perm/Fixed"
+$btnperm.width                   = 100
+$btnperm.height                  = 30
+$btnperm.location                = New-Object System.Drawing.Point(15,112)
+$btnperm.Font                    = 'Microsoft Sans Serif,10'
+
+$btnfreelance                    = New-Object system.Windows.Forms.Button
+$btnfreelance.text               = "Freelance"
+$btnfreelance.width              = 100
+$btnfreelance.height             = 30
+$btnfreelance.location           = New-Object System.Drawing.Point(115,112)
+$btnfreelance.Font               = 'Microsoft Sans Serif,10'
+
+$btnexp                          = New-Object system.Windows.Forms.Button
+$btnexp.text                     = "Work EXP"
+$btnexp.width                    = 100
+$btnexp.height                   = 30
+$btnexp.location                 = New-Object System.Drawing.Point(215,112)
+$btnexp.Font                     = 'Microsoft Sans Serif,10'
+
+$btnlondon                       = New-Object system.Windows.Forms.Button
+$btnlondon.text                  = "London"
+$btnlondon.width                 = 100
+$btnlondon.height                = 30
+$btnlondon.location              = New-Object System.Drawing.Point(15,173)
+$btnlondon.Font                  = 'Microsoft Sans Serif,10'
+
+$btnglasgow                      = New-Object system.Windows.Forms.Button
+$btnglasgow.text                 = "Glasgow"
+$btnglasgow.width                = 100
+$btnglasgow.height               = 30
+$btnglasgow.location             = New-Object System.Drawing.Point(115,173)
+$btnglasgow.Font                 = 'Microsoft Sans Serif,10'
+
+$btnholey                        = New-Object system.Windows.Forms.Button
+$btnholey.text                   = "Honley"
+$btnholey.width                  = 100
+$btnholey.height                 = 30
+$btnholey.location               = New-Object System.Drawing.Point(215,173)
+$btnholey.Font                   = 'Microsoft Sans Serif,10'
+
+$lblexsits                       = New-Object system.Windows.Forms.Label
+$lblexsits.text                  = "Account In Use"
+$lblexsits.AutoSize              = $true
+$lblexsits.width                 = 25
+$lblexsits.height                = 10
+$lblexsits.location              = New-Object System.Drawing.Point(213,25)
+$lblexsits.Font                  = 'Microsoft Sans Serif,10'
+
+$btnchild                        = New-Object system.Windows.Forms.Button
+$btnchild.text                   = "Child"
+$btnchild.width                  = 60
+$btnchild.height                 = 30
+$btnchild.location               = New-Object System.Drawing.Point(15,230)
+$btnchild.Font                   = 'Microsoft Sans Serif,8'
+
+$btntech                         = New-Object system.Windows.Forms.Button
+$btntech.text                    = "Tech"
+$btntech.width                   = 60
+$btntech.height                  = 30
+$btntech.location                = New-Object System.Drawing.Point(75,230)
+$btntech.Font                    = 'Microsoft Sans Serif,8'
+
+$btndigi                         = New-Object system.Windows.Forms.Button
+$btndigi.text                    = "Digi"
+$btndigi.width                   = 60
+$btndigi.height                  = 30
+$btndigi.location                = New-Object System.Drawing.Point(135,230)
+$btndigi.Font                    = 'Microsoft Sans Serif,8'
+
+$btnHQN                          = New-Object system.Windows.Forms.Button
+$btnHQN.text                     = "HQN"
+$btnHQN.width                    = 60
+$btnHQN.height                   = 30
+$btnHQN.location                 = New-Object System.Drawing.Point(15,260)
+$btnHQN.Font                     = 'Microsoft Sans Serif,8'
+
+$btnhqnglobal                    = New-Object system.Windows.Forms.Button
+$btnhqnglobal.text               = "HQN G"
+$btnhqnglobal.width              = 60
+$btnhqnglobal.height             = 30
+$btnhqnglobal.location           = New-Object System.Drawing.Point(75,260)
+$btnhqnglobal.Font               = 'Microsoft Sans Serif,8'
+
+$btnsales                        = New-Object system.Windows.Forms.Button
+$btnsales.text                   = "Sales"
+$btnsales.width                  = 60
+$btnsales.height                 = 30
+$btnsales.location               = New-Object System.Drawing.Point(135,260)
+$btnsales.Font                   = 'Microsoft Sans Serif,8'
+
+$btnclearn                       = New-Object system.Windows.Forms.Button
+$btnclearn.text                  = "C Learn"
+$btnclearn.width                 = 60
+$btnclearn.height                = 30
+$btnclearn.location              = New-Object System.Drawing.Point(15,290)
+$btnclearn.Font                  = 'Microsoft Sans Serif,8'
+
+$btn4th                          = New-Object system.Windows.Forms.Button
+$btn4th.text                     = "4th"
+$btn4th.width                    = 60
+$btn4th.height                   = 30
+$btn4th.location                 = New-Object System.Drawing.Point(75,290)
+$btn4th.Font                     = 'Microsoft Sans Serif,8'
+
+$btnnonfic                       = New-Object system.Windows.Forms.Button
+$btnnonfic.text                  = "Non Fic"
+$btnnonfic.width                 = 60
+$btnnonfic.height                = 30
+$btnnonfic.location              = New-Object System.Drawing.Point(135,290)
+$btnnonfic.Font                  = 'Microsoft Sans Serif,8'
+
+$FRMMain.controls.AddRange(@($LblUsername,$LblFN,$LblSN,$txtun,$txtfn,$txtsn,$btnperm,$btnfreelance,$btnexp,$btnlondon,$btnglasgow,$btnholey,$lblexsits,$btnchild,$btntech,$btndigi,$btnHQN,$btnhqnglobal,$btnsales,$btnclearn,$btn4th,$btnnonfic))
+
+function Accountshell{
+    Param ()
+    $SecPaswd= ConvertTo-SecureString –String '-+8!-Qbm=;-+!_D' –AsPlainText –Force
+    
+    $UN = $txtun.text
+    $UPN = $UN + "@harpercollins.co.uk"
+    $Displayname = $txtfn.Text + " " + $txtsn.Text
+    [datetime] $tstexp = (Get-Date).AddDays(+365).ToString('MM-dd-yyyy')
+    $setup = (Get-Date).ToString('MM-dd-yyyy')
+    New-ADUser -name $Displayname -SamAccountName $UN -UserPrincipalName $UPN -DisplayName $Displayname -givenname $txtfn.Text -Surname $txtsn.Text -Country "GB" -company "HC" -Path 'OU=New users,OU=HCUK Admin,DC=uk,DC=Harpercollins,DC=org' 
+    Set-ADAccountPassword -Reset -NewPassword $SecPaswd –Identity $UN
+    Get-ADUser -Identity  $UN| Enable-ADAccount;
+    Set-ADAccountExpiration -Identity $UN -DateTime $tstexp
+    [System.Windows.MessageBox]::Show($UN + ' Has been created ' )
+}
+#endregion GUI }
+#region gui events {
+$btnperm.Add_Click({
+    Accountshell
+    set-aduser -identity $txtun.Text -department "Perm Fixed"
+    get-aduser -identity PermFiX -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtun.Text;
+ })
+$btnfreelance.Add_Click({
+    Accountshell
+    set-aduser -identity $txtun.Text -department "Contractor"
+    get-aduser -identity FreeContract -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtun.Text;
+  })
+$btnexp.Add_Click({
+    Accountshell
+     set-aduser -identity $txtun.Text -department "Work EXP"
+    get-aduser -identity GradWO -properties memberof | select-object memberof -expandproperty memberof | Add-AdGroupMember -Members $txtun.Text;
+
+  })
+$btnholey.Add_Click({ 
+    Set-ADUser $txtun.Text -HomeDirectory ("\\uk.harpercollins.org\DFS\Users\Holmfirth\" + $txtun.Text)
+    Set-ADUser $txtun.Text -homedrive "P:"
+    Set-ADUser $txtun.Text -office "Holmfirth"
+    Set-ADUser $txtun.Text -Driveletter "P"
+    Add-ADGroupMember -Identity 'Holmfirth Users' -Member $txtun.Text
+    [System.Windows.MessageBox]::Show($txtun.Text + ' added to London' )
+   
+ })
+$btnglasgow.Add_Click({
+    Set-ADUser $txtun.Text -homedrive "P:"
+    Set-ADUser $txtun.Text -HomeDirectory ("\\uk.harpercollins.org\DFS\Users\glasgow\" + $txtun.Text)
+    Set-ADUser $txtun.Text -office "glasgow"
+    Add-ADGroupMember -Identity Glasgow -Member $txtun.Text
+    Add-ADGroupMember -Identity 'Everyone Glasgow' -Member $txtun.Text
+    [System.Windows.MessageBox]::Show($txtun.Text + ' added to Glasgow' )
+})
+$btnlondon.Add_Click({ 
+    Set-ADUser $txtun.Text -HomeDirectory ("\\uk.harpercollins.org\DFS\Users\London\" + $txtun.Text)
+    Set-ADUser $txtun.Text -homedrive "P:"
+    Set-ADUser $txtun.Text -office "London"
+    Add-ADGroupMember -Identity London -Member $txtun.Text
+    Add-ADGroupMember -Identity 'Everyone London' -Member $txtun.Text
+    [System.Windows.MessageBox]::Show($txtun.Text + ' added to Holmfirth' )
+    })
+$txtun.Add_TextChanged({ 
+$Name = $txtun.Text
+$User = Get-ADUser -LDAPFilter "(sAMAccountName=$Name)"
+If ($User -eq $Null) {$lblexsits.Text = "Username Free"}
+Else {$lblexsits.Text = "User name taken"}
+ })
+
+$btnnonfic.Add_Click({ 
+Add-ADGroupMember -Identity 'HarperNonFiction UK' -Member $txtun.Text
+[System.Windows.MessageBox]::Show($UN + ' Has been to Non Fication ' )
+ })
+
+$btnsales.Add_Click({ 
+Add-ADGroupMember -Identity 'Sales UK - Home & International All' -Member $txtun.Text
+Add-ADGroupMember -Identity SAL -Member $txtun.Text
+[System.Windows.MessageBox]::Show($UN + ' Has been to sales ' )
+ })
+$btndigi.Add_Click({
+Add-ADGroupMember -Identity Digital -Member $txtun.Text
+[System.Windows.MessageBox]::Show($UN + ' Has been to digi ' )
+ })
+$btntech.Add_Click({
+Add-ADGroupMember -Identity BSS -Member $txtun.Text
+Add-ADGroupMember -Identity 'Technology London' -Member $txtun.Text
+Add-ADGroupMember -Identity 'Technology Glasgow' -Member $txtun.Text
+[System.Windows.MessageBox]::Show($UN + ' Has been to tech ' )
+  })
+$btnhqnglobal.Add_Click({
+
+Add-ADGroupMember -Identity HQN -Member $txtun.Text
+Add-ADGroupMember -Identity 'TNB-GlobalAcquisitions' -Member $txtun.Text
+[System.Windows.MessageBox]::Show($UN + ' Has been to HQN Global' ) 
+})
+$btn4th.Add_Click({ 
+Add-ADGroupMember -Identity 4TH -Member $txtun.Text
+Add-ADGroupMember -Identity '4th Estate & William Collins' -Member $txtun.Text
+[System.Windows.MessageBox]::Show($UN + ' Has been to 4th Estates ' )
+})
+$btnchild.Add_Click({ 
+Add-ADGroupMember -Identity CHI -Member $txtun.Text
+Add-ADGroupMember -Identity 'Childrens Core' -Member $txtun.Text
+[System.Windows.MessageBox]::Show($UN + ' Has been to childrens ' )
+ })
+$btnHQN.Add_Click({
+Add-ADGroupMember -Identity HQN -Member $txtun.Text
+Add-ADGroupMember -Identity 'HQN Team On 16' -Member $txtun.Text
+[System.Windows.MessageBox]::Show($UN + ' Has been to HQN ' )
+  })
+$btnclearn.Add_Click({ 
+Add-ADGroupMember -Identity 'Collins Learning All ' -Member $txtun.Text
+[System.Windows.MessageBox]::Show($UN + ' Has been to Learning ' )
+})
+#endregion events }
+
+
+
+
+#Write your logic code here
+
+[void]$FRMMain.ShowDialog()
